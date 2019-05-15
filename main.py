@@ -37,21 +37,25 @@ def newpost():
         new_entry = Blog(blog_title,blog_body)
         db.session.add(new_entry)
         db.session.commit()
-        return redirect('/blog')
+        post_id = new_entry.id
+
+        return redirect('/blog/{0}'.format(post_id))
 
     return render_template('newpost.html')
 
 #This is a really clean way to do this
 @app.route('/blog/<int:post_id>')
 def blog(post_id):    
-    print("post_id = ",post_id)
+    print("post_id = ", post_id)
     return render_template('blog.html', posts=Blog.query.filter_by(id=post_id))
-
  
 @app.route('/blog/')
 def index():    
     return render_template('blog.html', posts=get_blog())
 
+@app.route('/')
+def start():
+    return redirect('/blog/')
 
 if __name__ == "__main__":
     app.run()
