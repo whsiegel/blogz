@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Add a Blog Entry</h1>    
+<form action='/newpost' method="post">
+
+    <p><label for='title'>Blog Title</label></p>
+    <p><textarea id='title' name='title'
+        maxlength='120' required rows=2 cols = 60 
+        placeholder="Must be less than 120 characters."
+        spellcheck="True"></textarea></p>
+
+    <p><label for='blog-entry'>Blog Entry</label></p>
+    <p><textarea id='blog-entry' name='blog-entry'
+        maxlength='1000' required rows='17' cols='60' 
+        placeholder="Must be less than 1000 characters."
+        spellcheck="True"></textarea>
+
+    <p><input type="submit"></p>
+
+</form>
+
+{% endblock %}
