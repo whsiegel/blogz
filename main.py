@@ -43,13 +43,13 @@ def newpost():
 
     return render_template('newpost.html')
 
-#This is a really clean way to do this
+#This is a really clean way to do this using flask variable rule
 @app.route('/blog/<int:post_id>')
 def blog(post_id):
     return render_template('blog.html', posts=Blog.query.filter_by(id=post_id))
  
 @app.route('/blog/')
-def index():    
+def index():
     return render_template('blog.html', posts=get_blog())
 
 @app.route('/')
