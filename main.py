@@ -45,8 +45,7 @@ def newpost():
 
 #This is a really clean way to do this
 @app.route('/blog/<int:post_id>')
-def blog(post_id):    
-    print("post_id = ", post_id)
+def blog(post_id):
     return render_template('blog.html', posts=Blog.query.filter_by(id=post_id))
  
 @app.route('/blog/')

@@ -1,13 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-{% if posts == None %}
-    <p>There is no post at this page yet</p>
-{% else %}
+
 {% for post in posts %}
     <article>
         <a href="/blog/{{post.id}}"><h2 class="post_title">{{post.title}}</h2></a>
         <p>{{post.body}}</p>
     </article>
 {% endfor %}
-{% endif %}
+
 {% endblock %}
