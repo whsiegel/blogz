@@ -1,37 +1,6 @@
-from flask import Flask, request, redirect, render_template, session, flash
-from flask_sqlalchemy import SQLAlchemy
-
-app = Flask(__name__)
-app.config['DEBUG'] = True      # displays runtime errors in the browser, too
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://blogz:hello@localhost:8889/blogz'
-app.config['SQLALCHEMY_ECHO'] = True
-db = SQLAlchemy(app)
-#!!!!!!!!!!!!!!!secret key not for production!!!!!!!!!!!!!!!
-app.secret_key = 'Welcome_to_my_blog'
-
-class Blog(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(120), unique=True)
-    body = db.Column(db.String(1000))
-    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
-    def __init__(self,title,body,owner):
-        self.title = title
-        self.body = body
-        self.owner = owner
-
-    def __repr__(self):
-        return '<Blog %r>' % self.title
-
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(120), unique = True)
-    password = db.Column(db.String(120))
-    blogs = db.relationship('Blog', backref='owner')
-
-    def __init__(self, email, password):
-        self.email = email
-        self.password = password
+from flask import request, redirect, render_template, session, flash
+from app import app, db
+from models import User, Blog
 
 @app.route('/login', methods = ['POST','GET'])
 def login():
@@ -141,6 +110,8 @@ def require_login():
     if not ('user' in session or request.endpoint in endpoints_without_login):
         return redirect("/signup")
 
+#!!!!!!!!!!!!!!!secret key not for production!!!!!!!!!!!!!!!
+app.secret_key = 'Welcome_to_my_blog'
 
 if __name__ == "__main__":
     app.run()
