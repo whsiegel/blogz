@@ -1,26 +1,50 @@
 <!DOCTYPE html>
 <html>
-    <head>
-            <title>A Blog</title>
-        <div>
-            <a href='/blog'>Main Blog Page</a>
-            <a href='/newpost'>Add a Blog Entry</a>
-        </div>
-    </head>
 
-    <body>
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-              <ul class=flashes>
-                {% for message in messages %}
-                <li>{{ message }}</li>
-                {% endfor %}
-              </ul>
-            {% endif %}
-        {% endwith %}
-    
-        {% block content %}
-        {% endblock %}
-    
-    </body>
-    </html>
+<head>
+    <title>Bill's Log in a Bog Blog</title>
+    <div>
+        <nav>
+            <a href="/"><-- Home--></a>
+            <a href='/blog'><-- Main blog page --></a>
+            <a href='/newpost'><-- Add a Blog Entry --></a>
+            <a href="/login"><-- Login --></a>
+            <a href="/signup"><-- Signup --></a>
+        </nav>
+    </div>
+    <div style='float: right'>
+        {% if 'user' in session %}
+        {{ session['user'] }}
+        <form action="/logout" method="post" id='logout'>
+            <input type="submit" value="Log Out" />
+        </form>
+        {% endif %}
+    </div>
+    <!-- Files included below are from https://www.w3schools.com/bootstrap/bootstrap_get_started.asp -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+
+</html>
