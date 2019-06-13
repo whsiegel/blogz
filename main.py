@@ -1,6 +1,7 @@
 from flask import request, redirect, render_template, session, flash
 from app import app, db
 from models import User, Blog
+from hashutils import check_pw_hash
 
 @app.route('/login', methods = ['POST','GET'])
 def login():
@@ -8,7 +9,7 @@ def login():
         email = request.form['email']
         password = request.form['password']
         user = User.query.filter_by(email=email).first()
-        if user and user.password == password:
+        if user and check_pw_hash(password, user.pw_hash):
             session['user']= email
             flash("Logged in")
             return redirect('/')
