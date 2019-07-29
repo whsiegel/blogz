@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
 
+<div class="container">
 <h2>Register New Account</h2>
 <form action="/signup" method="post">
-  <p><label>Email <input type="text" name="email"/ required></label></p>
-  <p><label>New Password <input type="password" name="password"/ required></label></p>
-  <p><label>Verify Password <input type="password" name="verify"/ required></label></p>
+  <p><label>Email <input type="text" name="email" required autocomplete="off"></label></p>
+  <p><label>New Password <input type="password" name="password" required></label></p>
+  <p><label>Verify Password <input type="password" name="verify" required></label></p>
   <p><input type="submit" value="Register"/></p>
 </form>
+</div>
 
 {% endblock %}

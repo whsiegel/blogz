@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<div class="container">
 <h1>Add a Blog Entry</h1>    
 <form action='/newpost' method="post">
 
@@ -16,8 +18,8 @@
         placeholder="Must be less than 1000 characters."
         spellcheck="True"></textarea>
 
-    <p><input type="submit"></p>
+    <p><input type="submit" value="Post"></p>
 
 </form>
-
+</div>
 {% endblock %}
